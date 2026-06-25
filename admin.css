@@ -1,0 +1,336 @@
+/* =====================================================================
+   Panel administracyjny — Parafia w Wiernej
+   Prosty, duży interfejs, działa na telefonie.
+   Paleta dopasowana do strony (styl.css), ale plik jest samodzielny.
+===================================================================== */
+:root {
+  --ink: #17130f;
+  --ink-soft: #2b241d;
+  --wine: #8f2723;
+  --wine-deep: #621713;
+  --gold: #c7a253;
+  --gold-soft: #ead39a;
+  --forest: #33594a;
+  --paper: #f4efe6;
+  --card: #fffdf8;
+  --line: rgba(58, 44, 31, 0.16);
+  --muted: #8c8171;
+  --stone: #6f6557;
+  --ok: #2f7d46;
+  --shadow: 0 14px 36px rgba(33, 25, 18, 0.14);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink-soft);
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  color: var(--ink);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  line-height: 1.1;
+}
+
+img, svg { display: block; max-width: 100%; }
+
+/* ---------- Przyciski ---------- */
+.btn {
+  display: inline-flex;
+  min-height: 52px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 12px 22px;
+  text-decoration: none;
+  transition: background .15s, border-color .15s, color .15s, transform .15s;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--wine); color: #fff8ed; }
+.btn-primary:hover { background: var(--wine-deep); }
+.btn-ghost { border-color: var(--line); background: var(--card); color: var(--wine); }
+.btn-ghost:hover { border-color: rgba(143,39,35,.4); }
+.btn-quiet { border-color: rgba(255,255,255,.4); background: rgba(255,255,255,.08); color: #fff8ed; }
+.btn-quiet:hover { border-color: var(--gold-soft); color: var(--gold-soft); }
+.btn-block { width: 100%; }
+.btn-danger { background: #fbe7e4; color: var(--wine-deep); border-color: #e5b5ad; }
+.btn-danger:hover { background: var(--wine); color: #fff8ed; }
+.btn-sm { min-height: 42px; padding: 8px 14px; font-size: .9rem; border-radius: 8px; }
+
+/* ---------- Pola formularzy ---------- */
+.fld { display: block; margin-top: 16px; }
+.fld span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.fld input,
+.fld textarea,
+.fld select {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink-soft);
+  font-family: inherit;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  padding: 13px 14px;
+}
+.fld textarea { resize: vertical; min-height: 110px; }
+.fld input:focus,
+.fld textarea:focus,
+.fld select:focus { outline: 0; border-color: var(--wine); box-shadow: 0 0 0 3px rgba(143,39,35,.12); }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+
+/* ---------- Ekran logowania ---------- */
+.login-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: linear-gradient(150deg, #17130f, #22382f);
+}
+.login-card {
+  width: min(420px, 100%);
+  background: var(--card);
+  border: 1px solid rgba(234,211,154,.3);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 34px 28px 28px;
+  text-align: center;
+}
+.login-emblem svg { width: 56px; height: 56px; margin: 0 auto 14px; }
+.login-card h1 { font-size: 2rem; }
+.login-sub { margin-top: 4px; color: var(--stone); font-size: .92rem; }
+.login-card .fld { text-align: left; }
+.login-card .btn-block { margin-top: 22px; }
+.login-back {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--wine);
+  font-size: .86rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ---------- Górny pasek ---------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  background: var(--ink);
+  color: #fff8ed;
+  padding: 12px 18px;
+}
+.topbar-brand { display: flex; align-items: center; gap: 10px; }
+.topbar-brand svg { width: 30px; height: 30px; }
+.topbar-brand strong { font-family: "Cormorant Garamond", Georgia, serif; font-size: 1.35rem; }
+.topbar-actions { display: flex; gap: 8px; }
+.topbar-actions .btn { min-height: 42px; padding: 8px 14px; font-size: .9rem; }
+
+/* ---------- Zakładki ---------- */
+.tabs {
+  position: sticky;
+  top: 58px;
+  z-index: 20;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  background: #efe7d8;
+  border-bottom: 1px solid var(--line);
+  padding: 8px 12px;
+  -webkit-overflow-scrolling: touch;
+}
+.tab {
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--stone);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: .98rem;
+  font-weight: 700;
+  padding: 11px 16px;
+  white-space: nowrap;
+}
+.tab:hover { background: rgba(143,39,35,.08); color: var(--wine); }
+.tab.is-active { background: var(--wine); color: #fff8ed; }
+
+/* ---------- Treść / karty ---------- */
+.content { max-width: 880px; margin: 0 auto; padding: 22px 16px 80px; }
+.panel { display: none; }
+.panel.is-active { display: block; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 22px 20px;
+  margin-bottom: 20px;
+}
+.card h2 { color: var(--wine-deep); font-size: 1.6rem; }
+.hint { margin-top: 6px; color: var(--stone); font-size: .95rem; }
+.current-img { margin-top: 14px; }
+.current-img img { width: 120px; height: 80px; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); }
+.current-img small { display: block; color: var(--muted); margin-bottom: 6px; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; }
+.progress { margin-top: 12px; color: var(--stone); font-size: .9rem; }
+
+/* ---------- Listy wpisów ---------- */
+.list { margin-top: 6px; }
+.row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+.row:first-child { border-top: 0; }
+.row-thumb {
+  width: 64px; height: 64px; flex: none;
+  object-fit: cover; border-radius: 8px; background: #eee; border: 1px solid var(--line);
+}
+.row-main { flex: 1; min-width: 0; }
+.row-main .meta {
+  color: var(--muted);
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.row-main .title { color: var(--ink); font-weight: 700; font-size: 1.05rem; margin-top: 2px; }
+.row-main .sub { color: var(--stone); font-size: .92rem; margin-top: 2px; }
+.badge {
+  display: inline-block;
+  margin-left: 8px;
+  border-radius: 999px;
+  padding: 2px 9px;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.badge.pub { background: #e7f0e7; color: var(--ok); }
+.badge.draft { background: #f3e7c4; color: #8a6d1c; }
+.row-actions { display: flex; flex-direction: column; gap: 6px; flex: none; }
+.list-group-title {
+  margin: 18px 0 4px;
+  color: var(--wine-deep);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.3rem;
+}
+.empty { color: var(--stone); font-style: italic; padding: 16px 0; }
+
+/* ---------- Galeria w panelu ---------- */
+.gal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  margin-top: 6px;
+}
+.gal-cell {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.gal-cell img { width: 100%; aspect-ratio: 1; object-fit: cover; cursor: zoom-in; }
+.gal-cell .cap { padding: 8px 10px; font-size: .82rem; color: var(--stone); flex: 1; }
+.gal-cell .cap b { display: block; color: var(--muted); font-size: .68rem; text-transform: uppercase; letter-spacing: .05em; }
+.gal-cell .btn { margin: 0 8px 8px; }
+
+/* ---------- Treści strony ---------- */
+.tresc-toolbar { display: flex; gap: 10px; margin: 14px 0 8px; flex-wrap: wrap; }
+.tresc-toolbar input { flex: 1; min-width: 180px; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font: inherit; }
+.tresc-page-title {
+  margin: 22px 0 8px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--gold);
+  color: var(--wine-deep);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.5rem;
+}
+.tresc-item { padding: 12px 0; border-top: 1px solid var(--line); }
+.tresc-item:first-of-type { border-top: 0; }
+.tresc-item label { display: block; }
+.tresc-item .k { color: var(--muted); font-size: .72rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 5px; }
+.tresc-item textarea {
+  width: 100%; border: 1px solid var(--line); border-radius: 10px; background: #fff;
+  font-family: inherit; font-size: 1rem; line-height: 1.5; padding: 10px 12px; resize: vertical; min-height: 48px;
+}
+.tresc-item textarea:focus { outline: 0; border-color: var(--wine); box-shadow: 0 0 0 3px rgba(143,39,35,.12); }
+.tresc-item.changed textarea { border-color: var(--gold); background: #fffbef; }
+
+/* ---------- Lightbox ---------- */
+.lightbox {
+  position: fixed; inset: 0; z-index: 100;
+  display: none; align-items: center; justify-content: center; flex-direction: column; gap: 14px;
+  background: rgba(13,10,8,.94); padding: 30px;
+}
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 92vw; max-height: 78vh; border-radius: 8px; object-fit: contain; }
+.lb-cap { max-width: 60ch; color: #fff8ed; text-align: center; }
+.lb-close {
+  position: absolute; top: 16px; right: 18px; width: 44px; height: 44px;
+  border: 1px solid rgba(255,255,255,.25); border-radius: 50%;
+  background: rgba(255,255,255,.08); color: #fff; cursor: pointer; font-size: 1.5rem;
+}
+
+/* ---------- Komunikaty (toasty) ---------- */
+.toast-wrap {
+  position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+  z-index: 200; display: flex; flex-direction: column; gap: 10px; width: min(420px, calc(100% - 28px));
+}
+.toast {
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-weight: 700;
+  box-shadow: var(--shadow);
+  animation: toastIn .2s ease;
+}
+.toast.ok  { background: #e7f0e7; color: var(--ok); border: 1px solid #b8d0bb; }
+.toast.err { background: #fbe7e4; color: var(--wine-deep); border: 1px solid #e5b5ad; }
+.toast.info{ background: #fff; color: var(--ink-soft); border: 1px solid var(--line); }
+@keyframes toastIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Komunikat w logowaniu ---------- */
+.msg { border-radius: 10px; padding: 11px 13px; margin-top: 14px; font-size: .92rem; font-weight: 600; }
+.msg.err { background: #fbe7e4; color: var(--wine-deep); border: 1px solid #e5b5ad; }
+.msg.ok  { background: #e7f0e7; color: var(--ok); border: 1px solid #b8d0bb; }
+
+/* ---------- Telefon ---------- */
+@media (max-width: 600px) {
+  body { font-size: 16px; }
+  .grid2 { grid-template-columns: 1fr; }
+  .content { padding: 16px 12px 80px; }
+  .card { padding: 18px 15px; }
+  .topbar-brand strong { font-size: 1.15rem; }
+  .row { flex-wrap: wrap; }
+  .row-actions { flex-direction: row; width: 100%; }
+  .row-actions .btn { flex: 1; }
+}

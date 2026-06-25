@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Panel administracyjny - Parafia w Wiernej</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- =================== EKRAN LOGOWANIA =================== -->
+<section class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="login-emblem">
+      <svg aria-hidden="true" viewBox="0 0 64 64"><path d="M32 57C17 46 6 37 6 24 6 15 12 9 20 9c5 0 9 3 12 8 3-5 7-8 12-8 8 0 14 6 14 15 0 13-11 22-26 33z" fill="#8f2723"></path><rect fill="#c7a253" height="24" rx="2" width="5.4" x="29.3" y="16"></rect><rect fill="#c7a253" height="5" rx="2" width="18" x="23" y="24"></rect></svg>
+    </div>
+    <h1>Panel kancelarii</h1>
+    <p class="login-sub">Parafia pw. Najświętszego Serca Jezusa w Wiernej</p>
+    <div id="loginMsg"></div>
+    <label class="fld">
+      <span>E-mail</span>
+      <input id="email" type="email" autocomplete="username" inputmode="email" placeholder="ksiadz@parafia.pl">
+    </label>
+    <label class="fld">
+      <span>Hasło</span>
+      <input id="haslo" type="password" autocomplete="current-password" placeholder="••••••••">
+    </label>
+    <button class="btn btn-primary btn-block" id="btnLogin">Zaloguj się</button>
+    <a class="login-back" href="parafia.html">← Powrót na stronę parafii</a>
+  </div>
+</section>
+
+<!-- =================== PANEL =================== -->
+<div class="app" id="app" hidden>
+  <header class="topbar">
+    <div class="topbar-brand">
+      <svg aria-hidden="true" viewBox="0 0 64 64"><path d="M32 57C17 46 6 37 6 24 6 15 12 9 20 9c5 0 9 3 12 8 3-5 7-8 12-8 8 0 14 6 14 15 0 13-11 22-26 33z" fill="#8f2723"></path><rect fill="#c7a253" height="24" rx="2" width="5.4" x="29.3" y="16"></rect><rect fill="#c7a253" height="5" rx="2" width="18" x="23" y="24"></rect></svg>
+      <strong>Panel kancelarii</strong>
+    </div>
+    <div class="topbar-actions">
+      <a class="btn btn-quiet" href="parafia.html" target="_blank" rel="noopener">Zobacz stronę</a>
+      <button class="btn btn-quiet" id="btnLogout">Wyloguj</button>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <button class="tab is-active" data-tab="aktualnosci">Aktualności</button>
+    <button class="tab" data-tab="ogloszenia">Ogłoszenia</button>
+    <button class="tab" data-tab="intencje">Intencje</button>
+    <button class="tab" data-tab="galeria">Galeria</button>
+    <button class="tab" data-tab="tresc">Treści strony</button>
+  </nav>
+
+  <main class="content">
+
+    <!-- ===== AKTUALNOŚCI ===== -->
+    <section class="panel is-active" id="tab-aktualnosci">
+      <div class="card">
+        <h2 id="aktFormTytul">Nowy wpis</h2>
+        <form id="aktForm" class="form">
+          <input type="hidden" id="aktId">
+          <label class="fld"><span>Tytuł</span>
+            <input id="aktTytul" type="text" required placeholder="Odpust parafialny"></label>
+          <label class="fld"><span>Treść wpisu</span>
+            <textarea id="aktTresc" rows="6" placeholder="Pełny tekst wpisu. Pusta linia rozdziela akapity."></textarea></label>
+          <div class="grid2">
+            <label class="fld"><span>Data</span>
+              <input id="aktData" type="date"></label>
+            <label class="fld"><span>Adres (slug) — opcjonalnie</span>
+              <input id="aktSlug" type="text" placeholder="zostaw puste = utworzy się automatycznie"></label>
+          </div>
+          <div class="grid2">
+            <label class="fld"><span>Zdjęcie</span>
+              <input id="aktFile" type="file" accept="image/*"></label>
+            <label class="fld"><span>Publikacja</span>
+              <select id="aktPub">
+                <option value="true">TAK — widoczny na stronie</option>
+                <option value="false">NIE — szkic (ukryty)</option>
+              </select></label>
+          </div>
+          <div id="aktCurrentImg" class="current-img"></div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Zapisz wpis</button>
+            <button type="button" class="btn btn-ghost" id="aktReset" hidden>Anuluj edycję</button>
+          </div>
+        </form>
+      </div>
+      <div class="card">
+        <h2>Wpisy</h2>
+        <div id="aktList" class="list"></div>
+      </div>
+    </section>
+
+    <!-- ===== OGŁOSZENIA ===== -->
+    <section class="panel" id="tab-ogloszenia">
+      <div class="card">
+        <h2 id="oglFormTytul">Nowe ogłoszenie</h2>
+        <form id="oglForm" class="form">
+          <input type="hidden" id="oglId">
+          <div class="grid2">
+            <label class="fld"><span>Dzień / liczba</span>
+              <input id="oglDzien" type="text" placeholder="12"></label>
+            <label class="fld"><span>Miesiąc / opis</span>
+              <input id="oglMiesiac" type="text" placeholder="Czerwca"></label>
+          </div>
+          <label class="fld"><span>Tytuł</span>
+            <input id="oglTytul" type="text" required placeholder="Odpust parafialny"></label>
+          <label class="fld"><span>Treść</span>
+            <textarea id="oglTresc" rows="4" placeholder="Suma odpustowa o godz. 11:00..."></textarea></label>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Zapisz ogłoszenie</button>
+            <button type="button" class="btn btn-ghost" id="oglReset" hidden>Anuluj edycję</button>
+          </div>
+        </form>
+      </div>
+      <div class="card">
+        <h2>Ogłoszenia (od najnowszych)</h2>
+        <div id="oglList" class="list"></div>
+      </div>
+    </section>
+
+    <!-- ===== INTENCJE ===== -->
+    <section class="panel" id="tab-intencje">
+      <div class="card">
+        <h2 id="intFormTytul">Nowa intencja</h2>
+        <form id="intForm" class="form">
+          <input type="hidden" id="intId">
+          <div class="grid2">
+            <label class="fld"><span>Dzień tygodnia</span>
+              <input id="intDzien" type="text" placeholder="Niedziela"></label>
+            <label class="fld"><span>Data / opis dnia</span>
+              <input id="intDataOpis" type="text" placeholder="12 czerwca - Uroczystość NSPJ"></label>
+          </div>
+          <div class="grid2">
+            <label class="fld"><span>Godzina</span>
+              <input id="intGodz" type="text" placeholder="8:00"></label>
+            <label class="fld"><span>Kolejność (0,1,2…)</span>
+              <input id="intKol" type="number" value="0"></label>
+          </div>
+          <label class="fld"><span>Intencja</span>
+            <textarea id="intTresc" rows="3" required placeholder="Za parafian i dobrodziejów"></textarea></label>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Zapisz intencję</button>
+            <button type="button" class="btn btn-ghost" id="intReset" hidden>Anuluj edycję</button>
+          </div>
+        </form>
+      </div>
+      <div class="card">
+        <h2>Intencje (pogrupowane wg dni)</h2>
+        <div id="intList" class="list"></div>
+      </div>
+    </section>
+
+    <!-- ===== GALERIA ===== -->
+    <section class="panel" id="tab-galeria">
+      <div class="card">
+        <h2>Dodaj zdjęcia</h2>
+        <form id="galForm" class="form">
+          <label class="fld"><span>Zdjęcia (można zaznaczyć wiele)</span>
+            <input id="galFile" type="file" accept="image/*" multiple required></label>
+          <label class="fld"><span>Wspólny podpis (opcjonalnie)</span>
+            <input id="galOpis" type="text" placeholder="Procesja Bożego Ciała"></label>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Wgraj zdjęcia</button>
+          </div>
+          <div id="galProgress" class="progress"></div>
+        </form>
+      </div>
+      <div class="card">
+        <h2>Zdjęcia w galerii</h2>
+        <div id="galGrid" class="gal-grid"></div>
+      </div>
+    </section>
+
+    <!-- ===== TREŚCI STRONY ===== -->
+    <section class="panel" id="tab-tresc">
+      <div class="card">
+        <h2>Treści na stronie</h2>
+        <p class="hint">Tu zmienisz teksty widoczne na stronie: hero, godziny mszy, kontakt, informacje kancelarii i sekcje strony głównej. Po zapisaniu zmiany pojawią się od razu na stronie parafii.</p>
+        <div class="tresc-toolbar">
+          <input id="trescSzukaj" type="search" placeholder="Szukaj tekstu…">
+          <button class="btn btn-primary" id="trescSave">Zapisz wszystkie zmiany</button>
+        </div>
+        <div id="trescList" class="tresc-list">
+          <p class="hint">Wczytywanie treści strony…</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Lightbox galerii -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lb-close" aria-label="Zamknij">×</button>
+  <img alt="">
+  <div class="lb-cap"></div>
+</div>
+
+<!-- Toast / komunikaty -->
+<div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+
+<script type="module" src="admin.js"></script>
+</body>
+</html>
