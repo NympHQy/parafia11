@@ -1529,6 +1529,38 @@ footer .disc {
   box-shadow: var(--shadow);
 }
 
+/* Rotujące ogłoszenia (np. na stronie Kontakt) */
+.ogl-rot {
+  display: flex;
+  flex-direction: column;
+}
+.ogl-rot-body {
+  min-height: 124px;
+  transition: opacity 0.25s ease;
+}
+.ogl-rot-body h3 {
+  margin-bottom: 8px;
+  font-size: 1.55rem;
+}
+.ogl-rot-body p {
+  color: rgba(255, 248, 234, 0.82);
+}
+.ogl-rot-dots {
+  display: flex;
+  gap: 7px;
+  margin-top: 14px;
+}
+.ogl-rot-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 248, 234, 0.28);
+  transition: background 0.2s;
+}
+.ogl-rot-dots span.on {
+  background: var(--gold-soft);
+}
+
 :focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 3px;

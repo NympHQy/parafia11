@@ -16,6 +16,7 @@ const hasOgl = Boolean($("#ogloszenia"));
 const hasInt = Boolean($("#intencje"));
 const hasAkt = Boolean($("#aktualnosci"));
 const hasGal = Boolean($("#galeria"));
+const hasOglRot = Boolean($("#oglRotator"));
 const isWpis = Boolean($("#wpis"));
 
 const fallbackAktualnosci = [
@@ -170,6 +171,43 @@ function renderOgloszenia(rows = fallbackOgloszenia) {
     .join("");
 }
 
+function renderOglRotator(rows) {
+  const box = $("#oglRotator");
+  if (!box) return;
+  const body = $(".ogl-rot-body", box);
+  if (!body) return;
+
+  const data = (rows && rows.length ? rows : fallbackOgloszenia).slice(0, 3);
+  if (box._timer) clearInterval(box._timer);
+
+  const render = (idx, immediate) => {
+    const o = data[idx];
+    const html = `
+      <h3>${esc(o.tytul)}</h3>
+      <p>${esc(o.tresc || "")}</p>
+      <div class="ogl-rot-dots">${data.map((_, k) => `<span class="${k === idx ? "on" : ""}"></span>`).join("")}</div>`;
+    if (immediate) {
+      body.innerHTML = html;
+      body.style.opacity = "1";
+      return;
+    }
+    body.style.opacity = "0";
+    setTimeout(() => {
+      body.innerHTML = html;
+      body.style.opacity = "1";
+    }, 250);
+  };
+
+  let i = 0;
+  render(0, true);
+  if (data.length > 1) {
+    box._timer = setInterval(() => {
+      i = (i + 1) % data.length;
+      render(i);
+    }, 5000);
+  }
+}
+
 function renderIntencje(rows) {
   const box = $("#intencje .int-table");
   if (!box) return;
@@ -287,6 +325,7 @@ function bindLightbox() {
 function renderInitialFallbacks() {
   if (hasAkt) renderAktualnosci();
   if (hasGal) renderGaleria();
+  if (hasOglRot) renderOglRotator(fallbackOgloszenia);
 }
 
 async function connectSupabase() {
@@ -332,6 +371,10 @@ async function loadPublic() {
     if (hasGal) {
       const { data } = await sb.from("galeria").select("*").order("created_at", { ascending: false });
       if (data) renderGaleria(data);
+    }
+    if (hasOglRot) {
+      const { data } = await sb.from("ogloszenia").select("*").order("created_at", { ascending: false }).limit(3);
+      renderOglRotator(data || []);
     }
   } catch (error) {
     console.warn("[Kancelaria] Odczyt treści:", error);
