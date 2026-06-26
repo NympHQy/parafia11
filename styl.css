@@ -15,7 +15,7 @@
   --muted: #8c8171;
   --line: rgba(58, 44, 31, 0.16);
   --shadow: 0 18px 45px rgba(33, 25, 18, 0.13);
-  --hero-image: url("assets/wierna.jpg");
+  --hero-image: url("wierna.jpg");
 }
 
 * {
