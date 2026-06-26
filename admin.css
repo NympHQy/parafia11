@@ -22,6 +22,9 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* Atrybut hidden musi mieć pierwszeństwo nad display z klas (.login-screen, .btn itd.) */
+[hidden] { display: none !important; }
+
 body {
   min-height: 100vh;
   background: var(--paper);
