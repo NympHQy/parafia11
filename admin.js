@@ -518,6 +518,10 @@ function otworzLightbox(url, cap) {
 ===================================================================== */
 const STRONY = [
   { plik: "parafia.html", nazwa: "Strona główna" },
+  { plik: "msze.html", nazwa: "Msze Święte" },
+  { plik: "historia.html", nazwa: "Historia parafii" },
+  { plik: "duszpasterze.html", nazwa: "Duszpasterze" },
+  { plik: "kontakt.html", nazwa: "Kontakt" },
   { plik: "aktualnosci.html", nazwa: "Aktualności (nagłówek)" },
   { plik: "ogloszenia.html", nazwa: "Ogłoszenia (nagłówek)" },
   { plik: "intencje.html", nazwa: "Intencje (nagłówek)" },
