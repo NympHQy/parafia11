@@ -127,22 +127,19 @@
     <section class="panel" id="tab-intencje">
       <div class="card">
         <h2 id="intFormTytul">Nowa intencja</h2>
+        <p class="hint">Wybierz datę z kalendarza — intencje możesz wpisywać z dowolnym wyprzedzeniem (np. na 2 miesiące do przodu). Na stronie pokazują się od dziś wzwyż, pogrupowane po dniach. Dzień tygodnia podpowie się sam.</p>
         <form id="intForm" class="form">
           <input type="hidden" id="intId">
           <div class="grid2">
-            <label class="fld"><span>Dzień tygodnia</span>
-              <input id="intDzien" type="text" placeholder="Niedziela"></label>
-            <label class="fld"><span>Data / opis dnia</span>
-              <input id="intDataOpis" type="text" placeholder="12 czerwca - Uroczystość NSPJ"></label>
-          </div>
-          <div class="grid2">
+            <label class="fld"><span>Data</span>
+              <input id="intData" type="date" required></label>
             <label class="fld"><span>Godzina</span>
               <input id="intGodz" type="text" placeholder="8:00"></label>
-            <label class="fld"><span>Kolejność (0,1,2…)</span>
-              <input id="intKol" type="number" value="0"></label>
           </div>
           <label class="fld"><span>Intencja</span>
             <textarea id="intTresc" rows="3" required placeholder="Za parafian i dobrodziejów"></textarea></label>
+          <label class="fld"><span>Kolejność tego dnia (0, 1, 2…) — gdy jest kilka Mszy</span>
+            <input id="intKol" type="number" value="0"></label>
           <div class="form-actions">
             <button type="submit" class="btn btn-primary">Zapisz intencję</button>
             <button type="button" class="btn btn-ghost" id="intReset" hidden>Anuluj edycję</button>

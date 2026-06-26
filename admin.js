@@ -29,6 +29,20 @@ function fmtDate(v) {
   } catch { return esc(v); }
 }
 
+const DNI_TYG = ["niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota"];
+function dataNaDzien(iso) {
+  if (!iso) return "";
+  const d = new Date(iso + "T12:00:00");
+  const n = DNI_TYG[d.getDay()] || "";
+  return n.charAt(0).toUpperCase() + n.slice(1);
+}
+function dataNaNapis(iso) {
+  if (!iso) return "";
+  try {
+    return new Date(iso + "T12:00:00").toLocaleDateString("pl-PL", { day: "numeric", month: "long", year: "numeric" });
+  } catch { return iso; }
+}
+
 function slugify(text) {
   const map = { ą: "a", ć: "c", ę: "e", ł: "l", ń: "n", ó: "o", ś: "s", ź: "z", ż: "z" };
   return String(text || "")
@@ -360,21 +374,25 @@ const intForm = $("#intForm");
 
 async function ladujIntencje() {
   const { data, error } = await sb.from("intencje").select("*")
-    .order("created_at", { ascending: true });
+    .order("data_dnia", { ascending: true, nullsFirst: false })
+    .order("kolejnosc", { ascending: true });
   const box = $("#intList");
   if (error) { box.innerHTML = `<p class="empty">Nie udało się wczytać.</p>`; return; }
   if (!data.length) { box.innerHTML = `<p class="empty">Brak intencji.</p>`; return; }
 
-  // grupowanie po dniu (+ opisie dnia)
+  // grupowanie po dacie (starsze wpisy bez daty trafiają do grup tekstowych)
   const grupy = new Map();
   data.forEach((it) => {
-    const klucz = `${it.dzien || ""}|${it.data || ""}`;
-    if (!grupy.has(klucz)) grupy.set(klucz, { dzien: it.dzien, data: it.data, rows: [] });
+    const klucz = it.data_dnia || `legacy|${it.dzien || ""}|${it.data || ""}`;
+    if (!grupy.has(klucz)) grupy.set(klucz, { data_dnia: it.data_dnia, dzien: it.dzien, data: it.data, rows: [] });
     grupy.get(klucz).rows.push(it);
   });
 
   box.innerHTML = [...grupy.values()].map((g) => {
     g.rows.sort((a, b) => (a.kolejnosc - b.kolejnosc));
+    const naglowek = g.data_dnia
+      ? `${esc(dataNaDzien(g.data_dnia))} · ${esc(dataNaNapis(g.data_dnia))}`
+      : `${esc(g.dzien || "Bez daty")}${g.data ? ` — ${esc(g.data)}` : ""}`;
     const wiersze = g.rows.map((it) => `
       <div class="row">
         <div class="row-main">
@@ -386,7 +404,7 @@ async function ladujIntencje() {
           <button class="btn btn-danger btn-sm" data-del="${esc(it.id)}">Usuń</button>
         </div>
       </div>`).join("");
-    return `<div class="list-group-title">${esc(g.dzien || "Bez dnia")}${g.data ? ` — ${esc(g.data)}` : ""}</div>${wiersze}`;
+    return `<div class="list-group-title">${naglowek}</div>${wiersze}`;
   }).join("");
 
   $$("#intList [data-edit]").forEach((b) => b.addEventListener("click", () => edytujInt(data.find((x) => x.id === b.dataset.edit))));
@@ -396,8 +414,7 @@ async function ladujIntencje() {
 function edytujInt(it) {
   if (!it) return;
   $("#intId").value = it.id;
-  $("#intDzien").value = it.dzien || "";
-  $("#intDataOpis").value = it.data || "";
+  $("#intData").value = it.data_dnia || "";
   $("#intGodz").value = it.godzina || "";
   $("#intKol").value = it.kolejnosc ?? 0;
   $("#intTresc").value = it.intencja || "";
@@ -415,10 +432,13 @@ $("#intReset").addEventListener("click", resetInt);
 intForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const intencja = $("#intTresc").value.trim();
+  const dataDnia = $("#intData").value;
+  if (!dataDnia) return err("Wybierz datę intencji.");
   if (!intencja) return err("Wpisz treść intencji.");
   const rec = {
-    dzien: $("#intDzien").value.trim(),
-    data: $("#intDataOpis").value.trim(),
+    data_dnia: dataDnia,
+    dzien: dataNaDzien(dataDnia),
+    data: dataNaNapis(dataDnia),
     godzina: $("#intGodz").value.trim(),
     intencja,
     kolejnosc: parseInt($("#intKol").value, 10) || 0,

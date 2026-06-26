@@ -310,7 +310,14 @@ async function loadPublic() {
       if (data) renderOgloszenia(data);
     }
     if (hasInt) {
-      const { data } = await sb.from("intencje").select("*").order("created_at", { ascending: true });
+      const now = new Date();
+      const dzis = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+      const { data } = await sb
+        .from("intencje")
+        .select("*")
+        .or(`data_dnia.gte.${dzis},data_dnia.is.null`)
+        .order("data_dnia", { ascending: true, nullsFirst: false })
+        .order("kolejnosc", { ascending: true });
       if (data) renderIntencje(data);
     }
     if (hasAkt) {
