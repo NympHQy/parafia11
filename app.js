@@ -3,8 +3,8 @@
    W razie przeniesienia strony do innego projektu Supabase podmień
    poniższy adres i publiczny klucz anon.
 ===================================================================== */
-const SUPABASE_URL = "https://jddflasgemogftulljsk.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_WfXTIBDiB20SueCLNiyp5w_iyJFkz7M";
+const SUPABASE_URL = "https://ccewjbhlqgszqogzjind.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_D-eARL7TPuEEVts4ft3oJQ_xL0lZljV";
 
 const cfg = Boolean(SUPABASE_URL && SUPABASE_ANON_KEY);
 let sb = null;

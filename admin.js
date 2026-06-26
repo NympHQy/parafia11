@@ -6,8 +6,8 @@
 ===================================================================== */
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
-const SUPABASE_URL = "https://jddflasgemogftulljsk.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_WfXTIBDiB20SueCLNiyp5w_iyJFkz7M";
+const SUPABASE_URL = "https://ccewjbhlqgszqogzjind.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_D-eARL7TPuEEVts4ft3oJQ_xL0lZljV";
 const BUCKET = "galeria";
 
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);

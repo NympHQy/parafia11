@@ -106,9 +106,12 @@ Panel jest dostępny pod adresem **`/admin.html`** (np. `https://twoja-domena.pl
 5. (Opcjonalnie) **Settings → Domains** → dodaj własną domenę (np. `parafiawierna.pl`)
    i ustaw rekordy DNS według instrukcji Vercela.
 
-### Po podpięciu własnej domeny
-W plikach `*.html` znaczniki `canonical` i `og:image` wskazują na `https://TWOJA-DOMENA.pl`.
-Możesz je podmienić na właściwy adres (to wpływa tylko na SEO, nie na działanie).
+### Domena
+Docelowa domena to **`parafiawiernarzeka.pl`** — jest już wpisana w znacznikach
+`canonical` we wszystkich plikach `*.html`. W Vercel: **Settings → Domains → Add**,
+wpisz `parafiawiernarzeka.pl` (i `www.parafiawiernarzeka.pl`) oraz ustaw rekordy DNS
+u rejestratora domeny zgodnie z instrukcją Vercela. Znaczniki `og:image` używają
+ścieżki względnej, więc działają niezależnie od domeny.
 
 ---
 
