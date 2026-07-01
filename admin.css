@@ -281,7 +281,7 @@ img, svg { display: block; max-width: 100%; }
 .tresc-item { padding: 12px 0; border-top: 1px solid var(--line); }
 .tresc-item:first-of-type { border-top: 0; }
 .tresc-item label { display: block; }
-.tresc-item .k { color: var(--muted); font-size: .72rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 5px; }
+.tresc-item .k { display: block; color: var(--wine-deep); font-size: .84rem; font-weight: 700; letter-spacing: 0; margin-bottom: 6px; }
 .tresc-item textarea {
   width: 100%; border: 1px solid var(--line); border-radius: 10px; background: #fff;
   font-family: inherit; font-size: 1rem; line-height: 1.5; padding: 10px 12px; resize: vertical; min-height: 48px;
