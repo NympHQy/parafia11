@@ -19,29 +19,7 @@ const hasGal = Boolean($("#galeria"));
 const hasOglRot = Boolean($("#oglRotator"));
 const isWpis = Boolean($("#wpis"));
 
-const fallbackAktualnosci = [
-  {
-    id: "start-odpust",
-    tytul: "Odpust ku czci Najświętszego Serca Pana Jezusa",
-    data: "2026-06-12",
-    tresc: "Wspólnota parafialna gromadzi się na uroczystej sumie odpustowej i procesji ku czci Patrona parafii.",
-    zdjecie: "assets/parafia-hero.png",
-  },
-  {
-    id: "start-czerwcowe",
-    tytul: "Nabożeństwa czerwcowe",
-    data: "2026-06-01",
-    tresc: "Przez cały czerwiec po Mszy wieczornej modlimy się litanią do Najświętszego Serca Pana Jezusa.",
-    zdjecie: "assets/parafia-hero.png",
-  },
-  {
-    id: "start-kancelaria",
-    tytul: "Sprawy kancelaryjne po Mszy wieczornej",
-    data: "2026-01-01",
-    tresc: "Intencje, zaświadczenia i sprawy sakramentalne można zgłaszać po Mszy Świętej lub po wcześniejszym uzgodnieniu telefonicznym.",
-    zdjecie: "assets/parafia-hero.png",
-  },
-];
+const fallbackAktualnosci = [];
 
 const fallbackIntencje = [
   {
@@ -63,26 +41,7 @@ const fallbackIntencje = [
   },
 ];
 
-const fallbackOgloszenia = [
-  {
-    dzien: "12",
-    miesiac: "Czerwca",
-    tytul: "Odpust parafialny",
-    tresc: "Uroczystość Najświętszego Serca Pana Jezusa jest świętem patronalnym naszej parafii. Zapraszamy do wspólnej modlitwy.",
-  },
-  {
-    dzien: "I",
-    miesiac: "Piątek",
-    tytul: "Adoracja i spowiedź",
-    tresc: "W pierwszy piątek miesiąca adoracja Najświętszego Sakramentu i nabożeństwo do Serca Pana Jezusa.",
-  },
-  {
-    dzien: "Po",
-    miesiac: "Mszy",
-    tytul: "Kancelaria parafialna",
-    tresc: "Sprawy parafialne można załatwiać po Mszy wieczornej oraz po wcześniejszym kontakcie telefonicznym.",
-  },
-];
+const fallbackOgloszenia = [];
 
 function esc(value) {
   return String(value ?? "")
@@ -159,7 +118,11 @@ function markActiveNav() {
 function renderOgloszenia(rows = fallbackOgloszenia) {
   const box = $("#ogloszenia .news-list");
   if (!box) return;
-  const data = rows.length ? rows : fallbackOgloszenia;
+  const data = rows && rows.length ? rows : fallbackOgloszenia;
+  if (!data.length) {
+    box.innerHTML = '<p style="padding:28px 30px;color:var(--stone)">Obecnie brak ogłoszeń.</p>';
+    return;
+  }
   box.innerHTML = data
     .map(
       (o) => `
@@ -179,6 +142,11 @@ function renderOglRotator(rows) {
 
   const data = (rows && rows.length ? rows : fallbackOgloszenia).slice(0, 3);
   if (box._timer) clearInterval(box._timer);
+
+  if (!data.length) {
+    body.innerHTML = '<p style="color:rgba(255,248,234,.82)">Aktualnie brak ogłoszeń.</p>';
+    return;
+  }
 
   const render = (idx, immediate) => {
     const o = data[idx];
@@ -250,7 +218,11 @@ function renderIntencje(rows) {
 function renderAktualnosci(rows = fallbackAktualnosci) {
   const box = $("#aktualnosci .akt-grid");
   if (!box) return;
-  const data = rows.length ? rows : fallbackAktualnosci;
+  const data = rows && rows.length ? rows : fallbackAktualnosci;
+  if (!data.length) {
+    box.innerHTML = '<p class="akt-empty">Obecnie brak aktualności.</p>';
+    return;
+  }
 
   box.innerHTML = data
     .map((item) => {
@@ -282,7 +254,7 @@ function renderGaleria(rows = []) {
   if (!box) return;
   if (!rows.length) {
     box.innerHTML =
-      '<p class="akt-empty">Galeria jest przygotowana. Zdjęcia można dodać w panelu kancelarii po zalogowaniu.</p>';
+      '<p class="akt-empty">Galeria jest w przygotowaniu — wkrótce pojawią się zdjęcia z życia parafii.</p>';
     return;
   }
 
@@ -393,7 +365,7 @@ async function renderWpis() {
         <a class="wpis-back" href="aktualnosci.html">← Wszystkie aktualności</a>
         <span class="akt-date">Parafia w Wiernej</span>
         <h1>Wybierz wpis z listy aktualności</h1>
-        <div class="wpis-body"><p>Ta podstrona wyświetla pełną treść wpisu dodanego w panelu kancelarii.</p></div>
+        <div class="wpis-body"><p>Przejdź do listy aktualności i wybierz interesujący Cię wpis.</p></div>
       </article>`;
     return;
   }

@@ -550,6 +550,149 @@ const STRONY = [
   { plik: "galeria.html", nazwa: "Galeria (nagłówek)" },
 ];
 
+// Zrozumiałe opisy pól edytowanych na stronie (zamiast kodów typu "hero-1")
+const ETYKIETY = {
+  // Strona główna
+  "hero-1": "Nagłówek — górna etykieta (diecezja i rok)",
+  "hero-2": "Nagłówek — opis pod tytułem",
+  "hero-3": "Kafelek 1 — liczba (rok erygowania)",
+  "hero-4": "Kafelek 1 — podpis",
+  "hero-5": "Kafelek 2 — liczba (konsekracja)",
+  "hero-6": "Kafelek 2 — podpis",
+  "hero-7": "Kafelek 3 — skrót (patron)",
+  "hero-8": "Kafelek 3 — podpis",
+  "quick-1": "Pasek informacji — godziny w niedziele",
+  "quick-2": "Pasek informacji — godziny w dni powszednie",
+  "quick-4": "Pasek informacji — telefon",
+  "loc-1": "Lokalizacja — adres pod mapą",
+  // Msze Święte
+  "mszh-eb": "Nagłówek strony — etykieta",
+  "mszh-pl": "Nagłówek strony — opis",
+  "msze-1": "Sekcja — etykieta",
+  "msze-2": "Sekcja — tytuł",
+  "msze-3": "Sekcja — opis",
+  "msze-4": "Kościół — tytuł karty",
+  "msze-5": "Kościół — dzień 1 (niedziele)",
+  "msze-6": "Kościół — godziny w niedziele",
+  "msze-7": "Kościół — dzień 2 (powszednie)",
+  "msze-8": "Kościół — godziny w powszednie",
+  "msze-9": "Kościół — dzień 3 (pierwszy piątek)",
+  "msze-10": "Kościół — godzina pierwszego piątku",
+  "msze-11": "Druga karta — tytuł",
+  "msze-12": "Kaplica w Miedziance — nazwa",
+  "msze-13": "Kaplica w Miedziance — godzina",
+  "msze-14": "Spowiedź — nazwa",
+  "msze-15": "Spowiedź — informacja",
+  "msze-16": "Chrzty — nazwa",
+  "msze-17": "Chrzty — informacja",
+  "msze-18": "Odwiedziny chorych — nazwa",
+  "msze-19": "Odwiedziny chorych — informacja",
+  // Historia
+  "histh-eb": "Nagłówek strony — etykieta",
+  "histh-pl": "Nagłówek strony — opis",
+  "hist-1": "Sekcja — etykieta",
+  "hist-2": "Sekcja — tytuł",
+  "hist-3": "Sekcja — opis",
+  "hist-4": "Wydarzenie 1 — rok",
+  "hist-5": "Wydarzenie 1 — tytuł",
+  "hist-6": "Wydarzenie 1 — opis",
+  "hist-7": "Wydarzenie 2 — rok",
+  "hist-8": "Wydarzenie 2 — tytuł",
+  "hist-9": "Wydarzenie 2 — opis",
+  "hist-10": "Wydarzenie 3 — rok",
+  "hist-11": "Wydarzenie 3 — tytuł",
+  "hist-12": "Wydarzenie 3 — opis",
+  "hist-13": "Wydarzenie 4 — rok",
+  "hist-14": "Wydarzenie 4 — tytuł",
+  "hist-15": "Wydarzenie 4 — opis",
+  // Duszpasterze
+  "duszh-eb": "Nagłówek strony — etykieta",
+  "duszh-pl": "Nagłówek strony — opis",
+  "kler-1": "Sekcja — etykieta",
+  "kler-2": "Sekcja — tytuł",
+  "kler-3": "Ksiądz 1 — funkcja",
+  "kler-4": "Ksiądz 1 — imię i nazwisko",
+  "kler-5": "Ksiądz 1 — rok święceń",
+  "kler-6": "Ksiądz 1 — w parafii od",
+  "kler-7": "Ksiądz 2 — funkcja",
+  "kler-8": "Ksiądz 2 — imię i nazwisko",
+  "kler-9": "Ksiądz 2 — rok święceń",
+  "kler-10": "Ksiądz 2 — w parafii od",
+  "kler-11": "Kaplica — etykieta",
+  "kler-12": "Kaplica — nazwa miejscowości",
+  "kler-13": "Kaplica — opis",
+  "kler-14": "Kaplica — dodatkowa informacja",
+  "kler-15": "Dom zakonny — etykieta",
+  "kler-16": "Dom zakonny — nazwa",
+  "kler-17": "Dom zakonny — opis / adres",
+  "kler-18": "Dom zakonny — telefon",
+  "her-1": "Cytat — tytuł",
+  "her-2": "Cytat — treść",
+  "her-3": "Cytat — podpis",
+  "her-4": "Dom Samotnej Matki — etykieta",
+  "her-5": "Dom Samotnej Matki — tytuł",
+  "her-6": "Dom Samotnej Matki — opis (część 1)",
+  "her-7": "Dom Samotnej Matki — opis (część 2)",
+  // Kontakt
+  "konth-eb": "Nagłówek strony — etykieta",
+  "konth-pl": "Nagłówek strony — opis",
+  "kont-1": "Etykieta „Kontakt”",
+  "kont-2": "Tytuł (nazwa parafii)",
+  "kont-3": "Adres — nazwa pola",
+  "kont-4": "Adres — treść",
+  "kont-5": "Telefon — nazwa pola",
+  "kont-6": "Telefon — numer",
+  "kont-7": "E-mail — nazwa pola",
+  "kont-8": "E-mail — adres",
+  // Aktualności (nagłówek)
+  "akth-eb": "Nagłówek strony — etykieta",
+  "akth-pl": "Nagłówek strony — opis",
+  // Ogłoszenia (nagłówek)
+  "oglh-1": "Nagłówek strony — etykieta",
+  "oglh-2": "Nagłówek strony — opis",
+  "ogl-1": "Sekcja — etykieta",
+  "ogl-2": "Sekcja — tytuł",
+  "ogl-3": "Sekcja — opis",
+  // Intencje (nagłówek)
+  "inth-1": "Nagłówek strony — etykieta",
+  "inth-2": "Nagłówek strony — opis",
+  "int-1": "Sekcja — etykieta",
+  "int-2": "Sekcja — tytuł",
+  "int-3": "Sekcja — opis",
+  "int-4": "Uwaga pod tabelą intencji",
+  // Kancelaria
+  "kanch-eb": "Nagłówek strony — etykieta",
+  "kanch-pl": "Nagłówek strony — opis",
+  "kanc-1": "Karta 1 — tytuł",
+  "kanc-3": "Karta 1 — opis",
+  "kanc-4": "Karta 2 — tytuł",
+  "kanc-5": "Karta 2 — opis",
+  "kanc-6": "Karta 3 — tytuł",
+  "kanc-7": "Karta 3 — opis",
+  // Sakramenty
+  "sakrh-eb": "Nagłówek strony — etykieta",
+  "sakrh-pl": "Nagłówek strony — opis",
+  "sakr-1": "Chrzest — tytuł",
+  "sakr-2": "Chrzest — opis",
+  "sakr-3": "Bierzmowanie — tytuł",
+  "sakr-4": "Bierzmowanie — opis",
+  "sakr-5": "Małżeństwo — tytuł",
+  "sakr-6": "Małżeństwo — opis",
+  "sakr-7": "Namaszczenie chorych — tytuł",
+  "sakr-8": "Namaszczenie chorych — opis",
+  "sakr-9": "Pogrzeb — tytuł",
+  "sakr-10": "Pogrzeb — opis",
+  // Galeria (nagłówek)
+  "galh-eb": "Nagłówek strony — etykieta",
+  "galh-pl": "Nagłówek strony — opis",
+};
+
+function etykieta(klucz, domyslna) {
+  if (ETYKIETY[klucz]) return ETYKIETY[klucz];
+  const podglad = String(domyslna || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  return podglad ? `„${podglad.slice(0, 45)}${podglad.length > 45 ? "…" : ""}”` : klucz;
+}
+
 let trescDomyslne = {};   // klucz -> { domyslna, nazwaStrony }
 
 async function ladujTresc() {
@@ -592,7 +735,7 @@ async function ladujTresc() {
           return `
           <div class="tresc-item" data-klucz="${esc(p.klucz)}">
             <label>
-              <span class="k">${esc(p.klucz)}</span>
+              <span class="k">${esc(etykieta(p.klucz, p.domyslna))}</span>
               <textarea rows="2" data-domyslna="${esc(p.domyslna)}">${esc(wart)}</textarea>
             </label>
           </div>`;
@@ -616,7 +759,8 @@ async function ladujTresc() {
 $("#trescSzukaj").addEventListener("input", (e) => {
   const q = e.target.value.toLowerCase();
   $$("#trescList .tresc-item").forEach((it) => {
-    const txt = (it.dataset.klucz + " " + it.querySelector("textarea").value).toLowerCase();
+    const label = it.querySelector(".k") ? it.querySelector(".k").textContent : "";
+    const txt = (label + " " + it.querySelector("textarea").value).toLowerCase();
     it.style.display = txt.includes(q) ? "" : "none";
   });
 });
