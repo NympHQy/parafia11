@@ -107,9 +107,9 @@ Panel jest dostępny pod adresem **`/admin.html`** (np. `https://twoja-domena.pl
    i ustaw rekordy DNS według instrukcji Vercela.
 
 ### Domena
-Docelowa domena to **`parafiawiernarzeka.pl`** — jest już wpisana w znacznikach
+Docelowa domena to **`parafiawierna.pl`** — jest już wpisana w znacznikach
 `canonical` we wszystkich plikach `*.html`. W Vercel: **Settings → Domains → Add**,
-wpisz `parafiawiernarzeka.pl` (i `www.parafiawiernarzeka.pl`) oraz ustaw rekordy DNS
+wpisz `parafiawierna.pl` (i `www.parafiawierna.pl`) oraz ustaw rekordy DNS
 u rejestratora domeny zgodnie z instrukcją Vercela. Znaczniki `og:image` używają
 ścieżki względnej, więc działają niezależnie od domeny.
 

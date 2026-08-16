@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://parafiawiernarzeka.pl/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://parafiawiernarzeka.pl/aktualnosci.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://parafiawiernarzeka.pl/msze.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://parafiawiernarzeka.pl/intencje.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://parafiawiernarzeka.pl/ogloszenia.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://parafiawiernarzeka.pl/kancelaria.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://parafiawiernarzeka.pl/sakramenty.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://parafiawiernarzeka.pl/galeria.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://parafiawiernarzeka.pl/historia.html</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://parafiawiernarzeka.pl/duszpasterze.html</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://parafiawiernarzeka.pl/kontakt.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://parafiawiernarzeka.pl/polityka-prywatnosci.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://parafiawierna.pl/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://parafiawierna.pl/aktualnosci.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://parafiawierna.pl/msze.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://parafiawierna.pl/intencje.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://parafiawierna.pl/ogloszenia.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://parafiawierna.pl/kancelaria.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://parafiawierna.pl/sakramenty.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://parafiawierna.pl/galeria.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://parafiawierna.pl/historia.html</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://parafiawierna.pl/duszpasterze.html</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://parafiawierna.pl/kontakt.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://parafiawierna.pl/polityka-prywatnosci.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
 </urlset>
