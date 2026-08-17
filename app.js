@@ -201,15 +201,23 @@ function renderIntencje(rows) {
       (group) => `
       <div class="int-day">
         <div class="int-day-head"><b>${esc(group.dzien)}</b><span>${esc(group.data)}</span></div>
-        ${group.rows
-          .map(
-            (item) => `
+        ${(() => {
+          const byTime = [];
+          group.rows.forEach((item) => {
+            const last = byTime[byTime.length - 1];
+            if (last && last.godzina === item.godzina) last.list.push(item.intencja);
+            else byTime.push({ godzina: item.godzina, list: [item.intencja] });
+          });
+          return byTime
+            .map(
+              (t) => `
           <div class="int-row">
-            <div class="hr">${esc(item.godzina)}</div>
-            <div class="desc">${intencjaHTML(item.intencja)}</div>
+            <div class="hr">${esc(t.godzina)}</div>
+            <div class="desc">${t.list.map((int) => `<div class="int-line">${intencjaHTML(int)}</div>`).join("")}</div>
           </div>`
-          )
-          .join("")}
+            )
+            .join("");
+        })()}
       </div>`
     )
     .join("");

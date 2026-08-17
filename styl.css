@@ -848,6 +848,12 @@ section {
   color: var(--ink-soft);
 }
 
+.int-row .int-line + .int-line {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dotted rgba(58, 44, 31, 0.16);
+}
+
 .int-row em {
   color: var(--stone);
   font-style: italic;
