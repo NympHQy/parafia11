@@ -227,10 +227,10 @@ function renderAktualnosci(rows = fallbackAktualnosci) {
   box.innerHTML = data
     .map((item) => {
       const href = String(item.id || "").startsWith("start-")
-        ? "aktualnosci.html"
+        ? "aktualnosci"
         : item.slug
-        ? `wpis.html?slug=${encodeURIComponent(item.slug)}`
-        : `wpis.html?id=${encodeURIComponent(item.id)}`;
+        ? `wpis?slug=${encodeURIComponent(item.slug)}`
+        : `wpis?id=${encodeURIComponent(item.id)}`;
       return `
       <a class="akt-card" href="${href}">
         ${
@@ -362,7 +362,7 @@ async function renderWpis() {
   if ((!id && !slug) || !sb) {
     box.innerHTML = `
       <article class="wpis-art">
-        <a class="wpis-back" href="aktualnosci.html">← Wszystkie aktualności</a>
+        <a class="wpis-back" href="aktualnosci">← Wszystkie aktualności</a>
         <span class="akt-date">Parafia w Wiernej</span>
         <h1>Wybierz wpis z listy aktualności</h1>
         <div class="wpis-body"><p>Przejdź do listy aktualności i wybierz interesujący Cię wpis.</p></div>
@@ -377,7 +377,7 @@ async function renderWpis() {
     document.title = `${data.tytul} - Parafia w Wiernej`;
     box.innerHTML = `
       <article class="wpis-art">
-        <a class="wpis-back" href="aktualnosci.html">← Wszystkie aktualności</a>
+        <a class="wpis-back" href="aktualnosci">← Wszystkie aktualności</a>
         <span class="akt-date">${fmtDate(data.data || data.created_at)}</span>
         <h1>${esc(data.tytul)}</h1>
         ${data.zdjecie ? `<img class="wpis-img" src="${esc(data.zdjecie)}" alt="${esc(data.tytul)}">` : ""}
@@ -386,7 +386,7 @@ async function renderWpis() {
   } catch {
     box.innerHTML = `
       <article class="wpis-art">
-        <a class="wpis-back" href="aktualnosci.html">← Wszystkie aktualności</a>
+        <a class="wpis-back" href="aktualnosci">← Wszystkie aktualności</a>
         <h1>Nie znaleziono wpisu</h1>
         <div class="wpis-body"><p>Wpis mógł zostać usunięty albo link jest nieaktualny.</p></div>
       </article>`;
