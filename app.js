@@ -371,7 +371,7 @@ async function renderWpis() {
     box.innerHTML = `
       <article class="wpis-art">
         <a class="wpis-back" href="aktualnosci">← Wszystkie aktualności</a>
-        <span class="akt-date">Parafia w Wiernej</span>
+        <span class="akt-date">Parafia w Wiernej Rzece</span>
         <h1>Wybierz wpis z listy aktualności</h1>
         <div class="wpis-body"><p>Przejdź do listy aktualności i wybierz interesujący Cię wpis.</p></div>
       </article>`;
@@ -382,7 +382,7 @@ async function renderWpis() {
     const zapytanie = sb.from("aktualnosci").select("*");
     const { data } = await (slug ? zapytanie.eq("slug", slug) : zapytanie.eq("id", id)).single();
     if (!data) throw new Error("Brak wpisu");
-    document.title = `${data.tytul} - Parafia w Wiernej`;
+    document.title = `${data.tytul} - Parafia w Wiernej Rzece`;
     box.innerHTML = `
       <article class="wpis-art">
         <a class="wpis-back" href="aktualnosci">← Wszystkie aktualności</a>
