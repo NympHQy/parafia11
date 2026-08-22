@@ -21,25 +21,7 @@ const isWpis = Boolean($("#wpis"));
 
 const fallbackAktualnosci = [];
 
-const fallbackIntencje = [
-  {
-    dzien: "Niedziela",
-    data: "bieżący tydzień",
-    rows: [
-      { godzina: "8:00", intencja: "Za parafian i dobrodziejów naszej wspólnoty" },
-      { godzina: "10:00", intencja: "O Boże błogosławieństwo dla rodzin naszej parafii" },
-      { godzina: "12:00", intencja: "W intencji dzieci i młodzieży" },
-      { godzina: "15:00", intencja: "Za zmarłych polecanych w wypominkach" },
-    ],
-  },
-  {
-    dzien: "Dni powszednie",
-    data: "poniedziałek - sobota",
-    rows: [
-      { godzina: "17:00", intencja: "Intencje przyjmowane w kancelarii parafialnej" },
-    ],
-  },
-];
+const fallbackIntencje = [];
 
 const fallbackOgloszenia = [];
 
@@ -180,21 +162,20 @@ function renderIntencje(rows) {
   const box = $("#intencje .int-table");
   if (!box) return;
 
-  let groups;
   if (!rows || !rows.length) {
-    groups = fallbackIntencje;
-  } else {
-    groups = [];
-    let cur = null;
-    rows.forEach((item) => {
-      const key = `${item.dzien || ""}|${item.data || ""}`;
-      if (!cur || cur.key !== key) {
-        cur = { key, dzien: item.dzien, data: item.data, rows: [] };
-        groups.push(cur);
-      }
-      cur.rows.push(item);
-    });
+    box.innerHTML = '<p style="padding:30px;color:var(--stone);text-align:center">Intencje na najbliższe dni pojawią się wkrótce.</p>';
+    return;
   }
+  const groups = [];
+  let cur = null;
+  rows.forEach((item) => {
+    const key = `${item.dzien || ""}|${item.data || ""}`;
+    if (!cur || cur.key !== key) {
+      cur = { key, dzien: item.dzien, data: item.data, rows: [] };
+      groups.push(cur);
+    }
+    cur.rows.push(item);
+  });
 
   box.innerHTML = groups
     .map(
